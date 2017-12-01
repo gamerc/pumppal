@@ -8,7 +8,7 @@
 
 import UIKit
 
-class DetailViewController: UIViewController {
+class DetailViewController: UIViewController, UITextViewDelegate {
 
     
     @IBOutlet weak var creatorLabel: UILabel!
@@ -22,6 +22,9 @@ class DetailViewController: UIViewController {
     
     var exercises: Exercises?
     
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -64,8 +67,8 @@ class DetailViewController: UIViewController {
 //        default:
 //            exercises?.exerciseSets = Int(setsTextLabel.text!)!
 //        }
-        exercises?.exerciseReps = Int(repsTextLabel.text!)!
-        exercises?.exerciseSets = Int(setsTextLabel.text!)!
+        exercises?.exerciseReps = Int(repsTextLabel.text!) ?? 0
+        exercises?.exerciseSets = Int(setsTextLabel.text!) ?? 0
         exercises?.exerciseTitle = exerciseTextField.text!
         exercises?.exerciseGroup = groupTextLabel.text!
         exercises?.restTime = restTimeTextLabel.text!
@@ -103,5 +106,7 @@ class DetailViewController: UIViewController {
     @IBAction func setsDoneButtonPressed(_ sender: UITextField) {
         setsTextLabel.resignFirstResponder()
     }
+    
+    
     
 }

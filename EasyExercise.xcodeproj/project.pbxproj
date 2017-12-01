@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		21D359241FCF460F00E06AD4 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 21D359231FCF460F00E06AD4 /* GoogleService-Info.plist */; };
+		21D359261FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D359251FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift */; };
 		21D629BD1FCE101500164AB9 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D629BC1FCE101500164AB9 /* AppDelegate.swift */; };
 		21D629BF1FCE101500164AB9 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 21D629BE1FCE101500164AB9 /* ViewController.swift */; };
 		21D629C21FCE101500164AB9 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 21D629C01FCE101500164AB9 /* Main.storyboard */; };
@@ -22,6 +23,7 @@
 		04FC4D9BA20DD5AEF753E20A /* Pods-EasyExercise.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyExercise.debug.xcconfig"; path = "Pods/Target Support Files/Pods-EasyExercise/Pods-EasyExercise.debug.xcconfig"; sourceTree = "<group>"; };
 		05E299F1F7E392D8AEC21E55 /* Pods-EasyExercise.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-EasyExercise.release.xcconfig"; path = "Pods/Target Support Files/Pods-EasyExercise/Pods-EasyExercise.release.xcconfig"; sourceTree = "<group>"; };
 		21D359231FCF460F00E06AD4 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; name = "GoogleService-Info.plist"; path = "../../GoogleService-Info.plist"; sourceTree = "<group>"; };
+		21D359251FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UINavigationController+preferencesStatusBarStyle.swift"; sourceTree = "<group>"; };
 		21D629B91FCE101500164AB9 /* EasyExercise.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = EasyExercise.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		21D629BC1FCE101500164AB9 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		21D629BE1FCE101500164AB9 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -69,6 +71,7 @@
 			children = (
 				21D629BC1FCE101500164AB9 /* AppDelegate.swift */,
 				21D629CE1FCE120200164AB9 /* Exercises.swift */,
+				21D359251FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift */,
 				21D629BE1FCE101500164AB9 /* ViewController.swift */,
 				21D629D01FCE131700164AB9 /* DetailViewController.swift */,
 				21D629C01FCE101500164AB9 /* Main.storyboard */,
@@ -255,6 +258,7 @@
 				21D629BF1FCE101500164AB9 /* ViewController.swift in Sources */,
 				21D629CF1FCE120200164AB9 /* Exercises.swift in Sources */,
 				21D629BD1FCE101500164AB9 /* AppDelegate.swift in Sources */,
+				21D359261FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift in Sources */,
 				21D629D11FCE131700164AB9 /* DetailViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

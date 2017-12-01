@@ -13,12 +13,27 @@ import FirebaseGoogleAuthUI
 
 class ViewController: UIViewController {
 
+    @IBOutlet weak var tableViewCell: UITableViewCell!
     @IBOutlet weak var tableView: UITableView!
+    @IBOutlet weak var signOutBarButtonItem: UIBarButtonItem!
     
     var exercises = [Exercises]()
     var authUI: FUIAuth!
     var db: Firestore!
     
+    let exerciseMuscles = ["Biceps",
+                           "Triceps",
+                           "Chest",
+                           "Shoulders",
+                           "Back",
+                           "Legs",
+                           "Cardio",
+                           "Abdominals"]
+    
+    
+    override var preferredStatusBarStyle: UIStatusBarStyle {
+        return .lightContent
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -30,7 +45,9 @@ class ViewController: UIViewController {
         authUI = FUIAuth.defaultAuthUI()
         authUI?.delegate = self
         
-//        exercises.append(Exercises(exerciseTitle: "Curls", exerciseGroup: "Biceps", exerciseReps: 15, exerciseSets: 3, restTime: "30 secs", details: "Try 30 lbs, but maybe drop to 25 lbs", placeDocumentID: "gamerc", postingUserID: "gamerc"))
+       
+        
+
         
     }
     
@@ -185,10 +202,29 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "Cell", for: indexPath)
         cell.textLabel?.text = exercises[indexPath.row].exerciseTitle
         cell.detailTextLabel?.text = exercises[indexPath.row].exerciseGroup
+        cell.textLabel?.font = UIFont(name: "Futura", size: 17)
+        cell.detailTextLabel?.font = UIFont(name: "Futura", size: 13)
         return cell
     }
     
+    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        return exerciseMuscles[section]
+    }
     
+    func numberOfSections(in tableView: UITableView) -> Int {
+        return exerciseMuscles.count
+    }
+    
+    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+        let height: CGFloat = 1
+        return height
+    }
+    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+        let header = view as! UITableViewHeaderFooterView
+        header.textLabel?.textColor = UIColor.white
+        header.textLabel?.font = UIFont(name: "Futura", size: 22)
+        header.tintColor = UIColor.darkGray
+    }
 }
 
 extension ViewController: FUIAuthDelegate {
