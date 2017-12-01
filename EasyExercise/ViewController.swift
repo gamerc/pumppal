@@ -28,7 +28,8 @@ class ViewController: UIViewController {
                            "Back",
                            "Legs",
                            "Cardio",
-                           "Abdominals"]
+                           "Abdominals",
+                           "Miscellaneous"]
     
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
@@ -123,12 +124,9 @@ class ViewController: UIViewController {
         let details = exercises[index].details
         
         
-        
-        // create dicitoanry representing data we want to save
-        
         let dataToSave: [String: Any] = ["exerciseTitle": exerciseTitle, "exerciseGroup": exerciseGroup, "postingUserID": exercises[index].postingUserID, "exerciseReps": exerciseReps, "exerciseSets": exerciseSets, "restTime": restTime, "details": details]
         
-        // if we have saved a record we'll have an ID
+       
         if exercises[index].placeDocumentID != "" {
             let ref = db.collection("exercises").document(exercises[index].placeDocumentID)
             ref.setData(dataToSave) { (error) in
@@ -138,7 +136,7 @@ class ViewController: UIViewController {
                     print("document updated with reference id \(ref.documentID)")
                 }
             }
-        } else { // otherwise we don't have an id and we need to save a new doc under a new ref ID
+        } else {
             var ref: DocumentReference? = nil
             ref = db.collection("exercises").addDocument(data: dataToSave) { (error) in
                 if let error = error {
@@ -207,24 +205,24 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
-    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
-        return exerciseMuscles[section]
-    }
+//    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+//        return exerciseMuscles[section]
+//    }
     
-    func numberOfSections(in tableView: UITableView) -> Int {
-        return exerciseMuscles.count
-    }
-    
-    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
-        let height: CGFloat = 1
-        return height
-    }
-    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
-        let header = view as! UITableViewHeaderFooterView
-        header.textLabel?.textColor = UIColor.white
-        header.textLabel?.font = UIFont(name: "Futura", size: 22)
-        header.tintColor = UIColor.darkGray
-    }
+//    func numberOfSections(in tableView: UITableView) -> Int {
+//        return exerciseMuscles.count
+//    }
+//
+//    func tableView(_ tableView: UITableView, heightForFooterInSection section: Int) -> CGFloat {
+//        let height: CGFloat = 1
+//        return height
+//    }
+//    func tableView(_ tableView: UITableView, willDisplayHeaderView view: UIView, forSection section: Int) {
+//        let header = view as! UITableViewHeaderFooterView
+//        header.textLabel?.textColor = UIColor.white
+//        header.textLabel?.font = UIFont(name: "Futura", size: 22)
+//        header.tintColor = UIColor.darkGray
+//    }
 }
 
 extension ViewController: FUIAuthDelegate {

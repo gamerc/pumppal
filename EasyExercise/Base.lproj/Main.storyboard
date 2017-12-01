@@ -176,7 +176,7 @@
                                         <rect key="frame" x="151.5" y="0.0" width="45.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
                                         <connections>
                                             <action selector="setsDoneButtonPressed:" destination="iSv-Cu-8vg" eventType="primaryActionTriggered" id="adK-8V-G0s"/>
                                         </connections>

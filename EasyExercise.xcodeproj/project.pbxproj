@@ -71,9 +71,9 @@
 			children = (
 				21D629BC1FCE101500164AB9 /* AppDelegate.swift */,
 				21D629CE1FCE120200164AB9 /* Exercises.swift */,
-				21D359251FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift */,
 				21D629BE1FCE101500164AB9 /* ViewController.swift */,
 				21D629D01FCE131700164AB9 /* DetailViewController.swift */,
+				21D359251FCF6CD700E06AD4 /* UINavigationController+preferencesStatusBarStyle.swift */,
 				21D629C01FCE101500164AB9 /* Main.storyboard */,
 				21D629C31FCE101500164AB9 /* Assets.xcassets */,
 				21D629C51FCE101500164AB9 /* LaunchScreen.storyboard */,

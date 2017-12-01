@@ -29,6 +29,8 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        detailsTextView.delegate = self
+        
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
         tap.cancelsTouchesInView = false
         self.view.addGestureRecognizer(tap)
@@ -40,7 +42,15 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         }
         
     }
-
+    
+    func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
+        if text == "\n" {
+            detailsTextView.resignFirstResponder()
+            return false
+        }
+        return true
+    }
+    
     func updateUserInterface() {
         exerciseTextField.text = exercises!.exerciseTitle
         groupTextLabel.text = exercises!.exerciseGroup
