@@ -13,6 +13,9 @@ import FirebaseGoogleAuthUI
 
 class ViewController: UIViewController {
 
+
+    @IBOutlet weak var segmentController: UISegmentedControl!
+    
     @IBOutlet weak var tableViewCell: UITableViewCell!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signOutBarButtonItem: UIBarButtonItem!
@@ -45,14 +48,12 @@ class ViewController: UIViewController {
         
         authUI = FUIAuth.defaultAuthUI()
         authUI?.delegate = self
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
         checkForUpdates()
-       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -101,6 +102,9 @@ class ViewController: UIViewController {
                 self.exercises.append(Exercises(exerciseTitle: exerciseTitle, exerciseGroup: exerciseGroup, exerciseReps: exerciseReps, exerciseSets: exerciseSets, restTime: restTime, details: details, placeDocumentID: placeDocumentID, postingUserID: postingUserID))
  
             }
+            if self.segmentController.selectedSegmentIndex != 0 {
+                self.sortBasedOnSegmentPressed()
+            }
             self.tableView.reloadData()
         }
     }
@@ -119,7 +123,19 @@ class ViewController: UIViewController {
         }
     }
     
-    
+    func sortBasedOnSegmentPressed() {
+        switch segmentController.selectedSegmentIndex {
+        case 0: // unsorted
+            loadData()
+        case 1: // A-Z
+            let sortedArray = exercises.sorted(by: {$0.exerciseGroup < $1.exerciseGroup})
+            exercises = sortedArray
+            tableView.reloadData()
+        default:
+            print("ERROR: You should never have gotten here!")
+        }
+        
+    }
     
     func saveData(index: Int) {
         if let postingUserID = (authUI.auth?.currentUser?.email) {
@@ -146,6 +162,7 @@ class ViewController: UIViewController {
                     print("error - updating document \(error.localizedDescription)")
                 } else {
                     print("document updated with reference id \(ref.documentID)")
+                    self.sortBasedOnSegmentPressed()
                 }
             }
         } else {
@@ -156,6 +173,7 @@ class ViewController: UIViewController {
                 } else {
                     print("document added with reference id \(ref!.documentID)")
                     self.exercises[index].placeDocumentID = "\(ref!.documentID)"
+                    self.sortBasedOnSegmentPressed()
                 }
             }
         }
@@ -188,8 +206,22 @@ class ViewController: UIViewController {
             tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
             saveData(index: newIndexPath.row)
         }
+//        let source = segue.source as! DetailViewController
+//        if tableView.indexPathForSelectedRow != nil {
+//            let indexOfMatch = exercises.index(where: {$0.placeDocumentID == source.exercises?.placeDocumentID})!
+//            exercises[indexOfMatch] = (source.exercises)!
+//            saveData(index: exercises[indexOfMatch])
+//        } else {
+//            let newIndexPath = IndexPath(row: exercises.count, section: 0)
+//            exercises.append((source.exercises)!)
+//            saveData(index: newIndexPath.row)
+//        }
+        
     }
     
+    @IBAction func aboutButtonPressed(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "About", sender: nil)
+    }
     
     @IBAction func signOutButtonPressed(_ sender: UIBarButtonItem) {
         do {
@@ -200,6 +232,11 @@ class ViewController: UIViewController {
             print("couldn't sign out")
         }
     }
+    
+    @IBAction func sortSegmentPressed(_ sender: UISegmentedControl) {
+        sortBasedOnSegmentPressed()
+    }
+    
 }
 
 extension ViewController: UITableViewDelegate, UITableViewDataSource {
@@ -217,6 +254,13 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         return cell
     }
     
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            deleteDataFile(index: indexPath.row)
+            exercises.remove(at: indexPath.row)
+            tableView.deleteRows(at: [indexPath], with: .fade)
+        }
+    }
 
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
@@ -237,6 +281,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
 //        header.textLabel?.font = UIFont(name: "Futura", size: 22)
 //        header.tintColor = UIColor.darkGray
 //    }
+
 }
 
 extension ViewController: FUIAuthDelegate {
