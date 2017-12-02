@@ -46,16 +46,13 @@ class ViewController: UIViewController {
         authUI = FUIAuth.defaultAuthUI()
         authUI?.delegate = self
         
-       
-        
-
-        
     }
     
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         loadData()
         checkForUpdates()
+       
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -107,6 +104,21 @@ class ViewController: UIViewController {
             self.tableView.reloadData()
         }
     }
+    
+    
+    
+    func deleteDataFile(index: Int) {
+        
+        let fileToDelete = db.collection("exercises").document(exercises[index].placeDocumentID)
+        fileToDelete.delete() { err in
+            if let err = err {
+                print("Error removing document: \(err)")
+            } else {
+                print("Document successfully removed!")
+            }
+        }
+    }
+    
     
     
     func saveData(index: Int) {
@@ -204,6 +216,8 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.font = UIFont(name: "Futura", size: 13)
         return cell
     }
+    
+
     
 //    func tableView(_ tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
 //        return exerciseMuscles[section]
