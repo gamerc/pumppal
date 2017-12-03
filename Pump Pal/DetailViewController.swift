@@ -10,6 +10,8 @@ import UIKit
 
 class DetailViewController: UIViewController, UITextViewDelegate {
 
+    @IBOutlet weak var cancelBarButtonItem: UIBarButtonItem!
+    @IBOutlet weak var saveBarButtonItem: UIBarButtonItem!
     
     @IBOutlet weak var creatorLabel: UILabel!
     @IBOutlet weak var exerciseTextField: UITextField!
@@ -21,6 +23,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var detailsTextView: UITextView!
     
     var exercises: Exercises?
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -29,6 +32,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        saveBarButtonItem.isEnabled = false
         detailsTextView.delegate = self
         
         let tap = UITapGestureRecognizer(target: self.view, action: #selector(UIView.endEditing(_:)))
@@ -37,15 +41,17 @@ class DetailViewController: UIViewController, UITextViewDelegate {
         
         if let exercises = exercises {
             self.updateUserInterface()
+            cancelBarButtonItem.title = "Back"
+            saveBarButtonItem.title = "Update"
         } else {
             exercises = Exercises(exerciseTitle: "", exerciseGroup: "", exerciseReps: 0, exerciseSets: 0, restTime: "", details: "", placeDocumentID: "", postingUserID: "")
         }
-        
     }
     
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if text == "\n" {
             detailsTextView.resignFirstResponder()
+            saveBarButtonItem.isEnabled = true
             return false
         }
         return true
@@ -63,20 +69,6 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
 
-
-
-//        do {
-//            try exercises?.exerciseReps = Int(repsTextLabel.text!)!
-//        } catch {
-//            exercises?.exerciseReps = 0
-//        }
-//
-//        switch setsTextLabel.text {
-//        case nil:
-//            exercises?.exerciseSets = 0
-//        default:
-//            exercises?.exerciseSets = Int(setsTextLabel.text!)!
-//        }
         exercises?.exerciseReps = Int(repsTextLabel.text!) ?? 0
         exercises?.exerciseSets = Int(setsTextLabel.text!) ?? 0
         exercises?.exerciseTitle = exerciseTextField.text!
@@ -99,22 +91,47 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     
     @IBAction func exerciseDoneButtonPressed(_ sender: UITextField) {
         exerciseTextField.resignFirstResponder()
+        saveBarButtonItem.isEnabled = true
     }
     
     @IBAction func groupDoneButtonPressed(_ sender: UITextField) {
         groupTextLabel.resignFirstResponder()
+        saveBarButtonItem.isEnabled = true
     }
     
     @IBAction func repsDoneButtonPressed(_ sender: UITextField) {
         repsTextLabel.resignFirstResponder()
+        saveBarButtonItem.isEnabled = true
     }
     
     @IBAction func restTimeDoneButtonPressed(_ sender: UITextField) {
         restTimeTextLabel.resignFirstResponder()
+        saveBarButtonItem.isEnabled = true
     }
     
     @IBAction func setsDoneButtonPressed(_ sender: UITextField) {
         setsTextLabel.resignFirstResponder()
+        saveBarButtonItem.isEnabled = true
+    }
+    
+    @IBAction func exerciseDidChange(_ sender: UITextField) {
+        saveBarButtonItem.isEnabled = true
+    }
+    
+    @IBAction func groupDidChange(_ sender: UITextField) {
+        saveBarButtonItem.isEnabled = true
+    }
+    
+    @IBAction func repsDidChange(_ sender: UITextField) {
+        saveBarButtonItem.isEnabled = true
+    }
+    
+    @IBAction func setsDidChange(_ sender: UITextField) {
+        saveBarButtonItem.isEnabled = true
+    }
+    
+    @IBAction func restDidChange(_ sender: UITextField) {
+        saveBarButtonItem.isEnabled = true
     }
     
     

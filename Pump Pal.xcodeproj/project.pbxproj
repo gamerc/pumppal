@@ -53,7 +53,7 @@
 		21D629B01FCE101500164AB9 = {
 			isa = PBXGroup;
 			children = (
-				21D629BB1FCE101500164AB9 /* EasyExercise */,
+				21D629BB1FCE101500164AB9 /* Pump Pal */,
 				21D629BA1FCE101500164AB9 /* Products */,
 				56D541F0C635740C5871062E /* Pods */,
 				AA4C28199F1A1E5F423D54E9 /* Frameworks */,
@@ -68,7 +68,7 @@
 			name = Products;
 			sourceTree = "<group>";
 		};
-		21D629BB1FCE101500164AB9 /* EasyExercise */ = {
+		21D629BB1FCE101500164AB9 /* Pump Pal */ = {
 			isa = PBXGroup;
 			children = (
 				21D629BC1FCE101500164AB9 /* AppDelegate.swift */,
@@ -83,7 +83,7 @@
 				21D629C81FCE101500164AB9 /* Info.plist */,
 				2165A1C01FD20C1E00FBFB70 /* GoogleService-Info.plist */,
 			);
-			path = EasyExercise;
+			path = "Pump Pal";
 			sourceTree = "<group>";
 		};
 		56D541F0C635740C5871062E /* Pods */ = {
@@ -337,7 +337,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = YES;
 				ONLY_ACTIVE_ARCH = YES;
 				SDKROOT = iphoneos;
@@ -388,7 +388,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 11.1;
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				SDKROOT = iphoneos;
 				SWIFT_OPTIMIZATION_LEVEL = "-Owholemodule";
@@ -403,7 +403,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QBDU49WHYM;
-				INFOPLIST_FILE = EasyExercise/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Pump Pal/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gamerc.EasyExercise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
@@ -419,7 +419,7 @@
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CODE_SIGN_STYLE = Automatic;
 				DEVELOPMENT_TEAM = QBDU49WHYM;
-				INFOPLIST_FILE = EasyExercise/Info.plist;
+				INFOPLIST_FILE = "$(SRCROOT)/Pump Pal/Info.plist";
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = gamerc.EasyExercise;
 				PRODUCT_NAME = "$(TARGET_NAME)";
