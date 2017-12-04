@@ -4,7 +4,6 @@
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
-        <deployment identifier="iOS"/>
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="13527"/>
         <capability name="Safe area layout guides" minToolsVersion="9.0"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
@@ -58,9 +57,9 @@
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
-                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="AeB-D0-Qjs">
+                            <toolbar opaque="NO" clearsContextBeforeDrawing="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="AeB-D0-Qjs">
                                 <rect key="frame" x="0.0" y="623" width="375" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMinY="YES"/>
+                                <viewLayoutGuide key="safeArea" id="Oo6-Pb-zgZ"/>
                                 <items>
                                     <barButtonItem title="About" id="hp1-hh-9ST">
                                         <color key="tintColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -85,14 +84,17 @@
                                     </barButtonItem>
                                 </items>
                                 <color key="tintColor" red="0.93158107999999995" green="0.23414054510000001" blue="0.25858667489999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                <color key="barTintColor" red="0.93158107999999995" green="0.23414054510000001" blue="0.25858667489999998" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                <color key="barTintColor" red="0.92798537015914917" green="0.13785874843597412" blue="0.14349415898323059" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             </toolbar>
                         </subviews>
                         <color key="backgroundColor" red="1" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                         <constraints>
                             <constraint firstItem="zi8-8K-zrK" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="1WV-AP-BOc"/>
                             <constraint firstItem="zi8-8K-zrK" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" constant="-44" id="84R-t8-8g3"/>
+                            <constraint firstItem="AeB-D0-Qjs" firstAttribute="leading" secondItem="6Tk-OE-BBY" secondAttribute="leading" id="IbN-Fa-z5l"/>
                             <constraint firstItem="zi8-8K-zrK" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="MZl-Kl-Vs3"/>
+                            <constraint firstItem="AeB-D0-Qjs" firstAttribute="bottom" secondItem="6Tk-OE-BBY" secondAttribute="bottom" id="VJI-Xl-2mY"/>
+                            <constraint firstItem="AeB-D0-Qjs" firstAttribute="trailing" secondItem="6Tk-OE-BBY" secondAttribute="trailing" id="bTC-LF-s2p"/>
                             <constraint firstItem="zi8-8K-zrK" firstAttribute="top" secondItem="6Tk-OE-BBY" secondAttribute="top" constant="4" id="ftO-rJ-Pxc"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="6Tk-OE-BBY"/>
@@ -112,6 +114,8 @@
                         </barButtonItem>
                     </navigationItem>
                     <connections>
+                        <outlet property="aboutButton" destination="hp1-hh-9ST" id="SHI-Fc-7aq"/>
+                        <outlet property="bottomToolBar" destination="AeB-D0-Qjs" id="WXg-7Z-ksB"/>
                         <outlet property="segmentController" destination="YGj-uf-6k3" id="tev-nd-6Xw"/>
                         <outlet property="signOutBarButtonItem" destination="wSr-co-2Mx" id="KCn-fP-yyr"/>
                         <outlet property="tableView" destination="zi8-8K-zrK" id="4hw-YZ-3hZ"/>
@@ -143,7 +147,7 @@
                                 <nil key="highlightedColor"/>
                             </label>
                             <stackView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="pua-vI-ajg">
-                                <rect key="frame" x="28" y="264" width="197" height="30"/>
+                                <rect key="frame" x="28" y="264" width="207" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Rest Time:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DPy-wG-vOt">
                                         <rect key="frame" x="0.0" y="0.0" width="71.5" height="30"/>
@@ -152,10 +156,10 @@
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="t0u-9V-OKB">
-                                        <rect key="frame" x="71.5" y="0.0" width="125.5" height="30"/>
+                                        <rect key="frame" x="71.5" y="0.0" width="135.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                        <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                        <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                         <connections>
                                             <action selector="restDidChange:" destination="iSv-Cu-8vg" eventType="editingChanged" id="fuG-Ua-xB9"/>
                                             <action selector="restTimeDoneButtonPressed:" destination="iSv-Cu-8vg" eventType="primaryActionTriggered" id="FG2-yR-wiz"/>
@@ -167,7 +171,7 @@
                                 <rect key="frame" x="28" y="111.5" width="319" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                 <connections>
                                     <action selector="exerciseDidChange:" destination="iSv-Cu-8vg" eventType="editingChanged" id="QzB-Ux-DAu"/>
                                     <action selector="exerciseDoneButtonPressed:" destination="iSv-Cu-8vg" eventType="primaryActionTriggered" id="oRw-py-p8A"/>
@@ -177,23 +181,23 @@
                                 <rect key="frame" x="28" y="181" width="319" height="30"/>
                                 <nil key="textColor"/>
                                 <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
-                                <textInputTraits key="textInputTraits" autocapitalizationType="sentences" returnKeyType="done"/>
+                                <textInputTraits key="textInputTraits" autocapitalizationType="words" returnKeyType="done"/>
                                 <connections>
                                     <action selector="groupDidChange:" destination="iSv-Cu-8vg" eventType="editingChanged" id="61l-cr-EOR"/>
                                     <action selector="groupDoneButtonPressed:" destination="iSv-Cu-8vg" eventType="primaryActionTriggered" id="Jec-DK-1ee"/>
                                 </connections>
                             </textField>
-                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillEqually" spacing="5" translatesAutoresizingMaskIntoConstraints="NO" id="TDh-Zj-KML">
-                                <rect key="frame" x="28" y="219" width="197" height="30"/>
+                            <stackView opaque="NO" contentMode="scaleToFill" distribution="fillProportionally" spacing="3" translatesAutoresizingMaskIntoConstraints="NO" id="TDh-Zj-KML">
+                                <rect key="frame" x="28" y="219" width="207" height="30"/>
                                 <subviews>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Reps:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tQ3-KJ-JkR">
-                                        <rect key="frame" x="0.0" y="0.0" width="45.5" height="30"/>
+                                        <rect key="frame" x="0.0" y="0.0" width="54.5" height="30"/>
                                         <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="G4k-z4-VRc">
-                                        <rect key="frame" x="50.5" y="0.0" width="45.5" height="30"/>
+                                        <rect key="frame" x="57.5" y="0.0" width="40" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -202,14 +206,20 @@
                                             <action selector="repsDoneButtonPressed:" destination="iSv-Cu-8vg" eventType="primaryActionTriggered" id="dse-qh-2cS"/>
                                         </connections>
                                     </textField>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text=" " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qBX-Ev-PBS">
+                                        <rect key="frame" x="100.5" y="0.0" width="7" height="30"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
                                     <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sets:" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="NdT-Xd-cvw">
-                                        <rect key="frame" x="101" y="0.0" width="45.5" height="30"/>
+                                        <rect key="frame" x="110.5" y="0.0" width="48" height="30"/>
                                         <fontDescription key="fontDescription" name="Futura-CondensedMedium" family="Futura" pointSize="22"/>
                                         <nil key="textColor"/>
                                         <nil key="highlightedColor"/>
                                     </label>
                                     <textField opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="vVk-kf-X67">
-                                        <rect key="frame" x="151.5" y="0.0" width="45.5" height="30"/>
+                                        <rect key="frame" x="161.5" y="0.0" width="45.5" height="30"/>
                                         <nil key="textColor"/>
                                         <fontDescription key="fontDescription" name="Futura-Medium" family="Futura" pointSize="17"/>
                                         <textInputTraits key="textInputTraits" keyboardType="numberPad" returnKeyType="done"/>
@@ -269,9 +279,9 @@
                             <constraint firstItem="Tu6-Il-dXb" firstAttribute="bottom" secondItem="jQC-1N-mF9" secondAttribute="bottom" constant="31" id="v1l-vs-6mO"/>
                             <constraint firstItem="qeJ-Ak-Oqy" firstAttribute="top" secondItem="rwv-vl-EU3" secondAttribute="bottom" constant="8" id="v1t-r8-r0c"/>
                             <constraint firstItem="TDh-Zj-KML" firstAttribute="leading" secondItem="Tu6-Il-dXb" secondAttribute="leading" constant="28" id="xRz-it-rD7"/>
-                            <constraint firstItem="Tu6-Il-dXb" firstAttribute="trailing" secondItem="TDh-Zj-KML" secondAttribute="trailing" constant="150" id="xxL-Jy-PE9"/>
+                            <constraint firstItem="Tu6-Il-dXb" firstAttribute="trailing" secondItem="TDh-Zj-KML" secondAttribute="trailing" constant="140" id="xxL-Jy-PE9"/>
                             <constraint firstItem="qeJ-Ak-Oqy" firstAttribute="leading" secondItem="Tu6-Il-dXb" secondAttribute="leading" constant="28" id="yV5-uT-WE7"/>
-                            <constraint firstItem="Tu6-Il-dXb" firstAttribute="trailing" secondItem="pua-vI-ajg" secondAttribute="trailing" constant="150" id="zDf-Hi-hco"/>
+                            <constraint firstItem="Tu6-Il-dXb" firstAttribute="trailing" secondItem="pua-vI-ajg" secondAttribute="trailing" constant="140" id="zDf-Hi-hco"/>
                         </constraints>
                         <viewLayoutGuide key="safeArea" id="Tu6-Il-dXb"/>
                     </view>
@@ -282,7 +292,7 @@
                                 <action selector="cancelBarButtonItemPressed:" destination="iSv-Cu-8vg" id="4xK-Nb-wPu"/>
                             </connections>
                         </barButtonItem>
-                        <barButtonItem key="rightBarButtonItem" title="Save" id="JqJ-z2-Atc">
+                        <barButtonItem key="rightBarButtonItem" title="Add" id="JqJ-z2-Atc">
                             <color key="tintColor" red="0.99999600649999998" green="1" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                             <connections>
                                 <segue destination="Rb1-7V-CZx" kind="unwind" unwindAction="unwindFromLocationDetailWithSegue:" id="hLv-zR-VVR"/>

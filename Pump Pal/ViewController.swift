@@ -14,8 +14,9 @@ import FirebaseGoogleAuthUI
 class ViewController: UIViewController {
 
 
+    @IBOutlet weak var bottomToolBar: UIToolbar!
     @IBOutlet weak var segmentController: UISegmentedControl!
-    
+    @IBOutlet weak var aboutButton: UIBarButtonItem!
     @IBOutlet weak var tableViewCell: UITableViewCell!
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var signOutBarButtonItem: UIBarButtonItem!
@@ -24,16 +25,16 @@ class ViewController: UIViewController {
     var authUI: FUIAuth!
     var db: Firestore!
     
-    let exerciseMuscles = ["Biceps",
-                           "Triceps",
-                           "Chest",
-                           "Shoulders",
-                           "Back",
-                           "Legs",
-                           "Cardio",
-                           "Abdominals",
-                           "Miscellaneous"]
-    
+//    let exerciseMuscles = ["Biceps",
+//                           "Triceps",
+//                           "Chest",
+//                           "Shoulders",
+//                           "Back",
+//                           "Legs",
+//                           "Cardio",
+//                           "Abdominals",
+//                           "Miscellaneous"]
+
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
         return .lightContent
@@ -137,26 +138,17 @@ class ViewController: UIViewController {
         
     }
     
-    func saveData(index: Int) {
+    func saveData(exerciseData: Exercises) {
         if let postingUserID = (authUI.auth?.currentUser?.email) {
-            exercises[index].postingUserID = postingUserID
+            exerciseData.postingUserID = postingUserID
         } else {
-            exercises[index].postingUserID = "unknown user"
+            exerciseData.postingUserID = "unknown user"
         }
         
-        let exerciseTitle = exercises[index].exerciseTitle
-        let exerciseGroup = exercises[index].exerciseGroup
-        let exerciseReps = exercises[index].exerciseReps
-        let exerciseSets = exercises[index].exerciseSets
-        let restTime = exercises[index].restTime
-        let details = exercises[index].details
+        let dataToSave: [String: Any] = exerciseData.dictionary
         
-        
-        let dataToSave: [String: Any] = ["exerciseTitle": exerciseTitle, "exerciseGroup": exerciseGroup, "postingUserID": exercises[index].postingUserID, "exerciseReps": exerciseReps, "exerciseSets": exerciseSets, "restTime": restTime, "details": details]
-        
-       
-        if exercises[index].placeDocumentID != "" {
-            let ref = db.collection("exercises").document(exercises[index].placeDocumentID)
+        if exerciseData.placeDocumentID != "" {
+            let ref = db.collection("exercises").document(exerciseData.placeDocumentID)
             ref.setData(dataToSave) { (error) in
                 if let error = error {
                     print("error - updating document \(error.localizedDescription)")
@@ -172,14 +164,58 @@ class ViewController: UIViewController {
                     print("error - adding document \(error.localizedDescription)")
                 } else {
                     print("document added with reference id \(ref!.documentID)")
-                    self.exercises[index].placeDocumentID = "\(ref!.documentID)"
+                    exerciseData.placeDocumentID = "\(ref!.documentID)"
                     self.sortBasedOnSegmentPressed()
                 }
             }
         }
-        
-        
     }
+    
+//    func saveData(index: Int) { // change this to accept a data structure
+//        if let postingUserID = (authUI.auth?.currentUser?.email) {
+//            exercises[index].postingUserID = postingUserID
+//        } else {
+//            exercises[index].postingUserID = "unknown user"
+//        }
+//
+//        let exerciseTitle = exercises[index].exerciseTitle
+//        let exerciseGroup = exercises[index].exerciseGroup
+//        let exerciseReps = exercises[index].exerciseReps
+//        let exerciseSets = exercises[index].exerciseSets
+//        let restTime = exercises[index].restTime
+//        let details = exercises[index].details
+//
+//        // create a dicitoanry
+//        // call .dictionary
+//
+//        let dataToSave: [String: Any] = ["exerciseTitle": exerciseTitle, "exerciseGroup": exerciseGroup, "postingUserID": exercises[index].postingUserID, "exerciseReps": exerciseReps, "exerciseSets": exerciseSets, "restTime": restTime, "details": details]
+//
+//
+//        if exercises[index].placeDocumentID != "" {
+//            let ref = db.collection("exercises").document(exercises[index].placeDocumentID)
+//            ref.setData(dataToSave) { (error) in
+//                if let error = error {
+//                    print("error - updating document \(error.localizedDescription)")
+//                } else {
+//                    print("document updated with reference id \(ref.documentID)")
+//                    self.sortBasedOnSegmentPressed()
+//                }
+//            }
+//        } else {
+//            var ref: DocumentReference? = nil
+//            ref = db.collection("exercises").addDocument(data: dataToSave) { (error) in
+//                if let error = error {
+//                    print("error - adding document \(error.localizedDescription)")
+//                } else {
+//                    print("document added with reference id \(ref!.documentID)")
+//                    self.exercises[index].placeDocumentID = "\(ref!.documentID)"
+//                    self.sortBasedOnSegmentPressed()
+//                }
+//            }
+//        }
+//
+//
+//    }
 
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "ShowDetail" {
@@ -195,28 +231,27 @@ class ViewController: UIViewController {
     
     @IBAction func unwindFromLocationDetail(segue: UIStoryboardSegue) {
         let source = segue.source as! DetailViewController
-        if let selectedIndexPath = tableView.indexPathForSelectedRow {
-            exercises[selectedIndexPath.row] = (source.exercises)!
-            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
-            saveData(index: selectedIndexPath.row)
-        } else {
-            let newIndexPath = IndexPath(row: exercises.count, section: 0)
-            exercises.append((source.exercises)!)
-            tableView.insertRows(at: [newIndexPath], with: .bottom)
-            tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
-            saveData(index: newIndexPath.row)
-        }
-//        let source = segue.source as! DetailViewController
-//        if tableView.indexPathForSelectedRow != nil {
-//            let indexOfMatch = exercises.index(where: {$0.placeDocumentID == source.exercises?.placeDocumentID})!
-//            exercises[indexOfMatch] = (source.exercises)!
-//            saveData(index: exercises[indexOfMatch])
+//        if let selectedIndexPath = tableView.indexPathForSelectedRow {
+//            exercises[selectedIndexPath.row] = (source.exercises)!
+//            tableView.reloadRows(at: [selectedIndexPath], with: .automatic)
+//            saveData(index: selectedIndexPath.row)
 //        } else {
 //            let newIndexPath = IndexPath(row: exercises.count, section: 0)
 //            exercises.append((source.exercises)!)
+//            tableView.insertRows(at: [newIndexPath], with: .bottom)
+//            tableView.scrollToRow(at: newIndexPath, at: .bottom, animated: true)
 //            saveData(index: newIndexPath.row)
 //        }
-        
+//
+        if tableView.indexPathForSelectedRow != nil {
+            let indexOfMatch = exercises.index(where: {$0.placeDocumentID ==        source.exercises?.placeDocumentID})!
+                exercises[indexOfMatch] = (source.exercises)!
+                saveData(exerciseData: exercises[indexOfMatch])
+        } else {
+            let newIndexPath = IndexPath(row: exercises.count, section: 0)
+            exercises.append((source.exercises)!)
+            saveData(exerciseData: (source.exercises)!)
+        }
     }
     
     @IBAction func aboutButtonPressed(_ sender: UIBarButtonItem) {
@@ -251,6 +286,7 @@ extension ViewController: UITableViewDelegate, UITableViewDataSource {
         cell.detailTextLabel?.text = exercises[indexPath.row].exerciseGroup
         cell.textLabel?.font = UIFont(name: "Futura", size: 17)
         cell.detailTextLabel?.font = UIFont(name: "Futura", size: 13)
+        cell.detailTextLabel?.textColor = UIColor.darkGray
         return cell
     }
     

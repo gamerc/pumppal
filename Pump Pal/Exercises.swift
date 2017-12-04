@@ -19,6 +19,10 @@ class Exercises {
     var placeDocumentID: String
     var postingUserID: String
     
+    var dictionary: [String: Any] {
+        return ["exerciseTitle": exerciseTitle, "exerciseGroup": exerciseGroup, "postingUserID": postingUserID, "exerciseReps": exerciseReps, "exerciseSets": exerciseSets, "restTime": restTime, "details": details]
+    }
+    
     init(exerciseTitle: String, exerciseGroup: String, exerciseReps: Int, exerciseSets: Int, restTime: String, details: String, placeDocumentID: String, postingUserID: String) {
         self.exerciseTitle = exerciseTitle
         self.exerciseGroup = exerciseGroup

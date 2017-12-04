@@ -23,6 +23,7 @@ class DetailViewController: UIViewController, UITextViewDelegate {
     @IBOutlet weak var detailsTextView: UITextView!
     
     var exercises: Exercises?
+    
 
     
     override var preferredStatusBarStyle: UIStatusBarStyle {
